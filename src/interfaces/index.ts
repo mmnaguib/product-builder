@@ -1,9 +1,9 @@
 export interface IProduct {
-  id: string | undefined;
+  id?: string | undefined;
   title: string;
   description: string;
   imageUrl: string;
-  price: number;
+  price: string;
   colors: string[];
   category: {
     name: string;
@@ -13,7 +13,7 @@ export interface IProduct {
 
 export interface IInputForm {
   id: string | undefined;
-  name: string;
+  name: 'title' | 'description' | 'price' | 'imageUrl';
   label: string;
   type: string;
 }
