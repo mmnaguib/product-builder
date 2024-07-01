@@ -2,11 +2,12 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import ProductCard from "./components/ProductCard/ProductCard";
 import Button from "./components/ui/Button";
 import Modal from "./components/ui/Modal";
-import { productList, formInputList } from "./data";
+import { productList, formInputList, Colors } from "./data";
 import Input from "./components/ui/Input";
 import { IProduct } from "./interfaces";
 import { validationProduct } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
+import CircleColor from "./components/CircleColor";
 
 const App = () => {
   const defaultProductObject = {
@@ -24,9 +25,7 @@ const App = () => {
     imageUrl: "",
     price: "",
   });
-  const productsList = productList.map((product) => (
-    <ProductCard product={product} key={product.id} />
-  ));
+  const [tempColors, setTempColors] = useState<string[]>([]);
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setProduct({
@@ -39,6 +38,10 @@ const App = () => {
       [name]: "",
     });
   };
+  console.log(tempColors);
+  const productsList = productList.map((product) => (
+    <ProductCard product={product} key={product.id} />
+  ));
 
   const renderInputs = formInputList.map((input) => (
     <div className="flex flex-col" key={input.id}>
@@ -58,6 +61,31 @@ const App = () => {
       <ErrorMessage message={errors[input.name]} />
     </div>
   ));
+
+  const renderColors = Colors.map((color) => (
+    <CircleColor
+      color={color}
+      key={color}
+      onClick={() => {
+        if (tempColors.includes(color)) {
+          setTempColors((prev) => prev.filter((c) => c !== color));
+          return;
+        }
+        setTempColors((prev) => [...prev, color]);
+      }}
+    />
+  ));
+  const selectedColors = tempColors.map((tempColor) => {
+    return (
+      <div
+        key={tempColor}
+        className="mb-2 px-1 rounded-md"
+        style={{ background: `${tempColor}`, color: "#fff" }}
+      >
+        {tempColor}
+      </div>
+    );
+  });
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -103,6 +131,8 @@ const App = () => {
       <Modal isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={formHandler}>
           {renderInputs}
+          <div className="flex space-x-1 flex-wrap">{selectedColors}</div>
+          <div className="flex space-x-1 flex-wrap">{renderColors}</div>
           <div className="flex items-center space-x-3">
             <Button className="bg-indigo-700 hover:bg-indigo-800">
               Submit

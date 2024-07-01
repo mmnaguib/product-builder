@@ -1,4 +1,5 @@
 import { IInputForm, IProduct } from "../interfaces";
+
 export const productList: IProduct[] = [
   {
     id: "1",
@@ -90,7 +91,7 @@ export const productList: IProduct[] = [
     title: "Product 8",
     description: "Description of Product 8",
     imageUrl: "https://picsum.photos/200/300",
-    price: '89.99',
+    price: "89.99",
     colors: ["#191970", "#9932CC", "#FF1493"],
     category: {
       name: "Category B",
@@ -114,7 +115,7 @@ export const productList: IProduct[] = [
     title: "Product 10",
     description: "Description of Product 10",
     imageUrl: "https://picsum.photos/200/300",
-    price: '109.99',
+    price: "109.99",
     colors: ["#FF4500", "#8B0000", "#8B4513"],
     category: {
       name: "Category C",
@@ -133,4 +134,16 @@ export const formInputList: IInputForm[] = [
   },
   { id: "image", name: "imageUrl", label: "Product Image Url", type: "text" },
   { id: "price", name: "price", label: "price", type: "text" },
+];
+
+export const Colors: string[] = [
+  "#000000",
+  "#808080",
+  "#FF0000",
+  "#00FF00",
+  "#0000FF",
+  "#FF0000",
+  "#00FFFF",
+  "#FF00FF",
+  "#C0C0C0",
 ];

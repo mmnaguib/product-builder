@@ -18,7 +18,7 @@ const ProductCard = ({ product }: IProps) => {
 
       <h3>{product.title}</h3>
       <p style={{ height: "48px" }}>{txtslice(product.description)}</p>
-      <div className="flex my-4 items-cetner space-x-2">
+      <div className="flex my-4 items-center space-x-2">
         <span className="w-5 h-5 rounded-full bg-indigo-700 cursor-pointer"></span>
         <span className="w-5 h-5 rounded-full bg-red-700 cursor-pointer"></span>
         <span className="w-5 h-5 rounded-full bg-yellow-700 cursor-pointer"></span>
