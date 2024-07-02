@@ -2,12 +2,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import ProductCard from "./components/ProductCard/ProductCard";
 import Button from "./components/ui/Button";
 import Modal from "./components/ui/Modal";
-import { productList, formInputList, Colors } from "./data";
+import { productList, formInputList, Colors, Categories } from "./data";
 import Input from "./components/ui/Input";
 import { IProduct } from "./interfaces";
 import { validationProduct } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
+import Select from "./components/ui/Select";
 
 const App = () => {
   const defaultProductObject = {
@@ -19,11 +20,13 @@ const App = () => {
     category: { name: "", imageUrl: "" },
   };
   const [product, setProduct] = useState<IProduct>(defaultProductObject);
+  const [products, setProducts] = useState<IProduct[]>(productList);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
     imageUrl: "",
     price: "",
+    colors: "",
   });
   const [tempColors, setTempColors] = useState<string[]>([]);
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +41,7 @@ const App = () => {
       [name]: "",
     });
   };
-  console.log(tempColors);
-  const productsList = productList.map((product) => (
+  const productsList = products.map((product) => (
     <ProductCard product={product} key={product.id} />
   ));
 
@@ -102,18 +104,39 @@ const App = () => {
   };
 
   const formHandler = (e: FormEvent<HTMLFormElement>) => {
-    const { title, description, imageUrl, price } = product;
+    const { title, description, imageUrl, price, colors } = product;
     e.preventDefault();
-    const errors = validationProduct({ title, description, imageUrl, price });
+    const errors = validationProduct({
+      title,
+      description,
+      imageUrl,
+      price,
+      colors,
+    });
     const hasError =
       Object.values(errors).some((value) => value === "") &&
       Object.values(errors).every((value) => value === "");
-    console.log(hasError);
 
     if (!hasError) {
       setErrors(errors);
+      return;
     }
+
+    setProducts((prev) => [
+      {
+        ...product,
+        id: Math.floor(Math.random() * 1000),
+        colors: tempColors,
+        category: selectedCategory,
+      },
+      ...prev,
+    ]);
+
+    setProduct(defaultProductObject);
+    setTempColors([]);
+    setIsOpen(false);
   };
+  const [selectedCategory, setSelectedCategory] = useState(Categories[0]);
 
   return (
     <div className="container">
@@ -131,8 +154,14 @@ const App = () => {
       <Modal isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={formHandler}>
           {renderInputs}
+
+          <Select
+            selected={selectedCategory}
+            setSelected={setSelectedCategory}
+          />
           <div className="flex space-x-1 flex-wrap">{selectedColors}</div>
           <div className="flex space-x-1 flex-wrap">{renderColors}</div>
+          <ErrorMessage message={errors["colors"]} />
           <div className="flex items-center space-x-3">
             <Button className="bg-indigo-700 hover:bg-indigo-800">
               Submit

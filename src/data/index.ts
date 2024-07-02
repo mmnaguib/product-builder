@@ -1,4 +1,4 @@
-import { IInputForm, IProduct } from "../interfaces";
+import { ICategory, IInputForm, IProduct } from "../interfaces";
 
 export const productList: IProduct[] = [
   {
@@ -142,8 +142,20 @@ export const Colors: string[] = [
   "#FF0000",
   "#00FF00",
   "#0000FF",
-  "#FF0000",
   "#00FFFF",
   "#FF00FF",
   "#C0C0C0",
+];
+
+export const Categories: ICategory[] = [
+  { id: 1, name: "Nike1", imageUrl: "" },
+  { id: 2, name: "Nike2", imageUrl: "" },
+  { id: 3, name: "Nike3", imageUrl: "" },
+  { id: 4, name: "Nike4", imageUrl: "" },
+  { id: 5, name: "Nike5", imageUrl: "" },
+  { id: 6, name: "Nike6", imageUrl: "" },
+  { id: 7, name: "Nike7", imageUrl: "" },
+  { id: 8, name: "Nike8", imageUrl: "" },
+  { id: 9, name: "Nike9", imageUrl: "" },
+  { id: 10, name: "Nike10", imageUrl: "" },
 ];
