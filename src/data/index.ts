@@ -7,7 +7,7 @@ export const productList: IProduct[] = [
     description:
       "Description of Product 1 Description of Product 1Description of Product 1Description of Product 1",
     imageUrl: "https://picsum.photos/200/300",
-    price: "19.99",
+    price: "1999",
     colors: ["#FF0000", "#00FF00", "#0000FF"],
     category: {
       name: "Category A",
@@ -19,7 +19,7 @@ export const productList: IProduct[] = [
     title: "Product 2",
     description: "Description of Product 2",
     imageUrl: "https://picsum.photos/200/300",
-    price: "29.99",
+    price: "2999",
     colors: ["#FFFF00", "#FF00FF", "#00FFFF"],
     category: {
       name: "Category B",
@@ -31,7 +31,7 @@ export const productList: IProduct[] = [
     title: "Product 3",
     description: "Description of Product 3",
     imageUrl: "https://picsum.photos/200/300",
-    price: "39.99",
+    price: "3999",
     colors: ["#800080", "#008080", "#808000"],
     category: {
       name: "Category A",
@@ -43,7 +43,7 @@ export const productList: IProduct[] = [
     title: "Product 4",
     description: "Description of Product 4",
     imageUrl: "https://picsum.photos/200/300",
-    price: "49.99",
+    price: "4999",
     colors: ["#C0C0C0", "#808080", "#A9A9A9"],
     category: {
       name: "Category C",
